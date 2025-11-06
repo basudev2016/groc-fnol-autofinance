@@ -1,0 +1,11 @@
+customer_id,first_name,last_name,email,phone,loan_number,vehicle_model,vehicle_year,registered_city
+C001,John,Doe,john.doe@example.com,9876543210,LN001,Honda Civic,2020,Bangalore
+C002,Jane,Smith,jane.smith@example.com,9123456780,LN002,Hyundai Creta,2021,Mumbai
+C003,Raj,Kumar,raj.kumar@example.com,9988776655,LN003,Tata Nexon,2019,Delhi
+C004,Sarah,Lee,sarah.lee@example.com,9765432180,LN004,Maruti Baleno,2022,Pune
+C005,Arjun,Patel,arjun.patel@example.com,9345678123,LN005,Kia Seltos,2020,Hyderabad
+C006,Emily,Clark,emily.clark@example.com,9898989898,LN006,MG Hector,2021,Chennai
+C007,Anita,Verma,anita.verma@example.com,9012345678,LN007,Toyota Innova,2018,Kolkata
+C008,Ravi,Sharma,ravi.sharma@example.com,9090909090,LN008,Skoda Rapid,2020,Ahmedabad
+C009,David,Wilson,david.wilson@example.com,9955667788,LN009,Volkswagen Polo,2019,Gurugram
+C010,Priya,Reddy,priya.reddy@example.com,9876012345,LN010,Maruti Swift,2021,Bangalore

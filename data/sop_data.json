@@ -1,0 +1,62 @@
+{
+  "coverage_overview": "Your motor insurance policy is a Comprehensive policy that covers both third-party liability and own damage. It includes optional add-ons depending on your plan.",
+  "standard_features": [
+    "Third-party liability (mandatory by law)",
+    "Own-damage coverage for accidental physical damage",
+    "Personal accident cover for owner-driver (up to policy limit)",
+    "Legal liability to paid driver and passengers (as per policy limits)"
+  ],
+  "common_addons": [
+    {
+      "code": "B2B",
+      "name": "Bumper-to-Bumper (Zero Depreciation)",
+      "description": "Covers the full cost of replaced parts without depreciation deduction for the insured vehicle's age, typically excludes rubber/consumable parts.",
+      "benefit": "Higher claim payout for part replacement; reduces customer out-of-pocket on claims."
+    },
+    {
+      "code": "RSA",
+      "name": "Roadside Assistance (24x7)",
+      "description": "Provides towing, on-spot repairs, fuel assistance, and minor part replacement for breakdowns or flat tyre.",
+      "benefit": "Convenience and reduced downtime after a breakdown."
+    },
+    {
+      "code": "ENG",
+      "name": "Engine Protection Cover",
+      "description": "Covers mechanical/engine damage due to oil leakage, water ingestion, and other internal engine failures (subject to T&Cs).",
+      "benefit": "Protects against expensive engine repairs not covered under standard OD."
+    },
+    {
+      "code": "PA",
+      "name": "Personal Accident (Enhanced)",
+      "description": "Enhanced PA cover that increases the sum insured for the driver and co-passengers beyond statutory minima.",
+      "benefit": "Higher payout for injury or death resulting from an accident."
+    },
+    {
+      "code": "NP",
+      "name": "Nil Depreciation (selected parts)",
+      "description": "No depreciation applied to certain replaced parts like bumpers, headlights and tail-lights.",
+      "benefit": "Reduces the customer's repair bill for common part replacements."
+    },
+    {
+      "code": "NCB_PROTECT",
+      "name": "NCB Protect",
+      "description": "Protects No-Claim Bonus in case of 1 claim within the policy period (subject to policy terms).",
+      "benefit": "Avoids loss of NCB for small claims."
+    }
+  ],
+  "claim_process_steps": [
+    "Step 1 — Immediate Action: Seek safety first. In case of injury, call emergency services.",
+    "Step 2 — Inform Insurer: Notify the insurer or log an FNOL within 24 hours via the app/portal or customer service.",
+    "Step 3 — Document: Click photos of damage, collect police report (if required), and gather witnesses' details.",
+    "Step 4 — Assessment: Insurer assigns an assessor or authorized workshop for damage evaluation.",
+    "Step 5 — Repair / Settlement: After acceptance, repair is authorized at network workshop or cash settlement is processed."
+  ],
+  "required_documents": [
+    "Vehicle Registration Certificate (RC)",
+    "Driving License of the driver",
+    "Police FIR (for theft/accident with third-party injury as required)",
+    "Photographs of the damage/incident",
+    "Estimate from the repair workshop (if available)"
+  ],
+  "sop_notes": "Coverage subject to policy terms, exclusions, waiting periods for add-ons, and territorial limits. Always consult the policy schedule for exact sums insured and deductibles."
+}

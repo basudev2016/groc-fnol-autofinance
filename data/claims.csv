@@ -1,0 +1,11 @@
+claim_id,customer_id,incident_type,incident_date,claim_status,estimated_damage,service_center,claim_amount,settlement_date,remarks
+CLM001,C002,Accident,12-08-2025,Closed,Front bumper and headlight,ABC Motors Mumbai,25000,05-09-2025,Claim settled successfully
+CLM002,C004,Theft,20-07-2025,Closed,Vehicle stolen - recovered,Dream Cars Pune,0,15-08-2025,Vehicle recovered - no payout
+CLM003,C001,Accident,05-10-2025,In Progress,Rear door dent and taillight,Speed Auto Bangalore,15000,,Awaiting insurance approval
+CLM004,C005,Damage,25-09-2025,In Progress,Windshield cracked,City Motors Hyderabad,8000,,Customer submitted photos
+CLM005,C007,Accident,10-06-2025,Closed,Side mirror and door dent,Shine Auto Kolkata,12000,02-07-2025,Claim closed successfully
+CLM006,C009,Theft,01-11-2025,New,Vehicle not recovered yet,,0,,Initial FNOL logged
+CLM007,C010,Accident,25-10-2025,In Progress,Rear bumper damage,SmartDrive Bangalore,18000,,Under repair
+CLM008,C003,Accident,18-07-2025,Closed,Minor front collision,DriveCare Delhi,9500,10-08-2025,Repair completed and settled
+CLM009,C006,Damage,15-09-2025,Closed,Roof dent due to hailstorm,Elite Auto Chennai,6000,30-09-2025,Claim processed
+CLM010,C008,Accident,28-10-2025,New,Left fender damage pending assessment,,0,,Claim just created

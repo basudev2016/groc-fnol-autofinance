@@ -1,0 +1,11 @@
+loan_number,customer_id,last_payment_date,next_due_date,emi_amount,payment_status,outstanding_balance,overdue_days,remarks
+LN001,C001,05-10-2025,05-11-2025,14500,Paid,120000,0,On-time payment
+LN002,C002,10-09-2025,10-10-2025,17800,Overdue,89000,25,Payment missed in October
+LN003,C003,01-10-2025,01-11-2025,13200,Paid,66000,0,Regular customer
+LN004,C004,20-08-2025,20-09-2025,15500,Overdue,46500,45,Due since September
+LN005,C005,25-10-2025,25-11-2025,16800,Paid,134000,0,Active loan
+LN006,C006,30-09-2025,30-10-2025,19200,Overdue,98000,10,Payment delayed
+LN007,C007,12-10-2025,12-11-2025,15000,Paid,75000,0,On schedule
+LN008,C008,05-10-2025,05-11-2025,14000,Paid,56000,0,No issues
+LN009,C009,15-08-2025,15-09-2025,16000,Overdue,48000,50,Account flagged for follow-up
+LN010,C010,30-10-2025,30-11-2025,12500,Paid,37500,0,All dues clear
