@@ -2,7 +2,7 @@
 import streamlit as st
 import os
 import pandas as pd
-
+import preload_patch  # 🩵 fixes Render proxy issue before any import
 # ===========================
 # PAGE CONFIG
 # ===========================
