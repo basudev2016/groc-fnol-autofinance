@@ -1,25 +1,31 @@
 # ===========================================
-# llm_loader.py (Final Stable + Render Safe)
+# llm_loader.py (Final Render-Proof Fix)
 # ===========================================
 import os
 from dotenv import load_dotenv
 from langchain.llms.base import LLM
 from langchain_community.llms import Ollama
 
-# Try importing Groq (optional dependency)
+# ✅ Forcefully remove proxy variables BEFORE any Groq import
+for proxy_var in ["HTTP_PROXY", "HTTPS_PROXY", "ALL_PROXY", "http_proxy", "https_proxy", "all_proxy"]:
+    if proxy_var in os.environ:
+        print(f"⚙️ Removing proxy var: {proxy_var}")
+        os.environ.pop(proxy_var, None)
+
+# Now import Groq safely
 try:
     from groq import Groq
 except ImportError:
     Groq = None
 
-# Load .env only for local testing — Render ignores this automatically
+# Load .env locally (Render ignores)
 load_dotenv()
 
 
 class ChatGroq(LLM):
     """
     LangChain-compatible wrapper for Groq API.
-    Render-safe version that avoids proxy issues.
+    This version safely handles Render’s proxy injection.
     """
 
     def __init__(
@@ -30,17 +36,9 @@ class ChatGroq(LLM):
         max_tokens: int = 2048,
     ):
         if Groq is None:
-            raise ImportError(
-                "Groq library not installed. Please install it using `pip install groq`."
-            )
+            raise ImportError("Groq library not installed. Run `pip install groq`.")
 
-        # ✅ Prevent Render proxy injection conflicts
-        for proxy_var in ["HTTP_PROXY", "HTTPS_PROXY", "ALL_PROXY"]:
-            if proxy_var in os.environ:
-                print(f"⚙️ Removing proxy variable: {proxy_var}")
-                del os.environ[proxy_var]
-
-        # ✅ Initialize Groq client safely
+        # Initialize Groq client
         self.client = Groq(api_key=groq_api_key)
         self.model = model
         self.temperature = temperature
@@ -59,8 +57,7 @@ class ChatGroq(LLM):
             )
             return completion.choices[0].message.content
         except Exception as e:
-            print(f"❌ Groq API call failed: {e}")
-            return f"[Error: Unable to reach Groq API - {e}]"
+            return f"❌ Groq API call failed: {e}"
 
     @property
     def _llm_type(self) -> str:
@@ -69,24 +66,18 @@ class ChatGroq(LLM):
 
 def load_llm(default_model="llama3-8b-8192"):
     """
-    Dynamically load LLM backend — Groq Cloud (default) or Ollama local.
+    Load either Groq Cloud or Local Ollama model dynamically.
     """
     backend = os.getenv("LLM_BACKEND", "groq").lower()
     model_name = os.getenv("LLM_MODEL", default_model)
 
-    # ✅ Case 1: Ollama (Local)
     if backend == "ollama":
         print(f"🧠 Using Local Ollama model: {model_name}")
         return Ollama(model=model_name)
 
-    # ✅ Case 2: Groq Cloud (Default)
     groq_api_key = os.getenv("GROQ_API_KEY")
-
     if not groq_api_key:
-        raise ValueError(
-            "❌ GROQ_API_KEY not found in environment or .env file. "
-            "Set it in Render > Environment tab or in your .env locally."
-        )
+        raise ValueError("❌ GROQ_API_KEY not found in environment or .env file.")
 
     print(f"⚡ Using Groq Cloud model: {model_name}")
     return ChatGroq(
