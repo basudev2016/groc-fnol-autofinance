@@ -1,5 +1,5 @@
 # ===========================================
-# llm_loader.py (Final Stable Version)
+# llm_loader.py (Render-Compatible Final Version)
 # ===========================================
 import os
 from dotenv import load_dotenv
@@ -7,13 +7,14 @@ from langchain.llms.base import LLM
 from langchain_community.llms import Ollama
 from groq import Groq
 
-load_dotenv()
+# Try loading local .env (for development)
+load_dotenv(override=True)
 
 
 class ChatGroq(LLM):
     """
     LangChain-compatible wrapper for the Groq API.
-    Supports callbacks, metadata, cache, and is fully Pydantic-safe.
+    Works both locally (.env) and on Render (Environment Variables).
     """
 
     def __init__(
@@ -28,7 +29,7 @@ class ChatGroq(LLM):
         verbose=False,
         cache=None,
     ):
-        # Use object.__setattr__ to bypass Pydantic's BaseModel field restriction
+        # Use object.__setattr__ to bypass Pydantic restrictions
         object.__setattr__(self, "client", Groq(api_key=groq_api_key))
         object.__setattr__(self, "model", model)
         object.__setattr__(self, "temperature", temperature)
@@ -39,12 +40,10 @@ class ChatGroq(LLM):
         object.__setattr__(self, "tags", tags or [])
         object.__setattr__(self, "metadata", metadata or {})
         object.__setattr__(self, "verbose", verbose)
-        object.__setattr__(self, "cache", cache)  # ✅ NEW — fixes AttributeError
+        object.__setattr__(self, "cache", cache)
 
     def _call(self, prompt: str, **kwargs) -> str:
-        """
-        Execute a Groq chat completion and return model output.
-        """
+        """Execute a Groq chat completion and return model output."""
         completion = self.client.chat.completions.create(
             messages=[{"role": "user", "content": prompt}],
             model=self.model,
@@ -60,23 +59,31 @@ class ChatGroq(LLM):
 
 def load_llm(default_model="llama3-8b-8192"):
     """
-    Dynamically load either Groq Cloud LLM or Local Ollama
-    based on environment variable LLM_BACKEND.
+    Dynamically load either Groq Cloud LLM or Local Ollama.
+    Automatically uses Render's environment variable if running in the cloud.
     """
     backend = os.getenv("LLM_BACKEND", "groq").lower()
     model_name = os.getenv("LLM_MODEL", default_model)
 
+    # ✅ Always check Render Environment first (os.environ)
+    groq_api_key = os.getenv("GROQ_API_KEY")
+
+    # If running locally and still not found, try .env
+    if not groq_api_key:
+        load_dotenv(override=True)
+        groq_api_key = os.getenv("GROQ_API_KEY")
+
     if backend == "ollama":
         print(f"🧠 Using Local Ollama model: {model_name}")
         return Ollama(model=model_name)
-    else:
-        groq_api_key = os.getenv("GROQ_API_KEY")
-        if not groq_api_key:
-            raise ValueError("❌ GROQ_API_KEY not found in .env file.")
-        print(f"⚡ Using Groq Cloud model: {model_name}")
-        return ChatGroq(
-            model=model_name,
-            groq_api_key=groq_api_key,
-            temperature=0.2,
-            max_tokens=2048,
-        )
+
+    if not groq_api_key:
+        raise ValueError("❌ GROQ_API_KEY not found in environment or .env file.")
+
+    print(f"⚡ Using Groq Cloud model: {model_name}")
+    return ChatGroq(
+        model=model_name,
+        groq_api_key=groq_api_key,
+        temperature=0.2,
+        max_tokens=2048,
+    )
