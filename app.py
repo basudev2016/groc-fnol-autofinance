@@ -1,8 +1,19 @@
 
-import streamlit as st
+# ===========================================
+# app.py (top)
+# ===========================================
+import sys
 import os
+
+# ✅ Ensure current directory is in sys.path
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+# ✅ Load Render proxy patch before anything else
+import preload_patch
+
+import streamlit as st
 import pandas as pd
-import preload_patch  # 🩵 fixes Render proxy issue before any import
+
 # ===========================
 # PAGE CONFIG
 # ===========================
